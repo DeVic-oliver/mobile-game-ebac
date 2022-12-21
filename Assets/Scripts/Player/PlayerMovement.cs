@@ -1,67 +1,51 @@
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections;
 using UnityEngine;
-
-using Scripts.Core.Interfaces;
 using Scripts.Utils;
 
-public class PlayerMovement : MonoBehaviour, IMovable
+namespace Assets.Scripts.Player
 {
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpHeight;
+    public class PlayerMovement : MonoBehaviour
+    {
 
-    private CharacterController _controller;
-    private Vector3 playerVelocity;
-    private float gravityValue = -9.8f;
-    private float fowardMoveSpeed = 3f;
-    private bool isGrounded;
-    private Vector3 playerMove;
+        [SerializeField] private float moveSpeed;
+        [SerializeField] private float horizontalSpeed;
+        [SerializeField] private float jumpHeight;
 
-    void Start()
-    {
-        InitComponents();
-    }
-    private void InitComponents()
-    {
-        _controller = GetComponent<CharacterController>();
-    }
+        private float gravityValue = -9.8f;
+        private float fowardMoveSpeed = 3f;
+        private bool isGrounded;
+        private float velocity;
 
-    void Update()
-    {
-        Move(true);
-    }
-    public void Move(bool isAlive)
-    {
-        if (isAlive)
+        void Update()
         {
             isGrounded = JumpRaycaster.CheckIfIsGrounded(gameObject.GetComponent<Collider>(), 0.2f);
-            
-            SetPlayerVerticalVelocityToZero();
-            
-            playerMove = new Vector3(Input.GetAxis("Horizontal") * moveSpeed, 0, fowardMoveSpeed);
-            _controller.Move(playerMove * Time.deltaTime);
-
-            CheckJump();
+            velocity += gravityValue * Time.deltaTime;
+            Move(true);
         }
-
-    }
-    private void SetPlayerVerticalVelocityToZero()
-    {
-        if (isGrounded && playerVelocity.y < 0)
+        public void Move(bool isAlive)
         {
-            playerVelocity.y = 0;
+            if (isAlive)
+            {
+                transform.Translate(Vector3.forward * fowardMoveSpeed * Time.deltaTime);
+                TouchSimulator.MoveInAbscissaByTouchSimulation(transform, horizontalSpeed);
+                SetPlayerVerticalVelocityToZero();
+                CheckJump();
+            }
         }
-    }
-    private void CheckJump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        private void SetPlayerVerticalVelocityToZero()
         {
-            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * gravityValue);
+            if (isGrounded && velocity < 0)
+            {
+                velocity = 0;
+            }
         }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        _controller.Move(playerVelocity * Time.deltaTime);
+        private void CheckJump()
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                velocity = Mathf.Sqrt(jumpHeight * -3f * gravityValue);
+            }
+            transform.Translate(Vector3.up * velocity * Time.deltaTime);
+        }
     }
-
-   
 }
