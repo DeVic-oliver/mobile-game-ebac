@@ -1,28 +1,25 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Scripts.Core.Interfaces;
+using Assets.Scripts.SceneManager;
 
 namespace Assets.Scripts.Player
 {
-    [RequireComponent(typeof(PlayerMovement))]
     public class Player : MonoBehaviour
     {
+        public static bool isAlive { get; private set; }
+
         private string _obstacleTag = "Obstacle";
-        private PlayerMovement _playerMovement;
+        private string _finishLineTag = "FinishLine";
+
+        private void Awake()
+        {
+            isAlive = true;
+        }
 
         // Use this for initialization
         void Start()
         {
-            InitComponents();
-            InitPlayerStatusToMovement();
-        }
-        private void InitComponents()
-        {
-            _playerMovement = GetComponent<PlayerMovement>();
-        }
-        private void InitPlayerStatusToMovement()
-        {
-            _playerMovement.isAlive = true;
         }
 
         // Update is called once per frame
@@ -44,7 +41,12 @@ namespace Assets.Scripts.Player
         {
             if (collision.gameObject.CompareTag(_obstacleTag))
             {
-                _playerMovement.isAlive = false;
+                isAlive = false;
+            }
+
+            if (collision.gameObject.CompareTag(_finishLineTag))
+            {
+                GameManager.IsPlayerReachedFinishlLine = true;
             }
         }
 

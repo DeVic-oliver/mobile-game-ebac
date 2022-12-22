@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Scripts.Utils;
+using Assets.Scripts.SceneManager;
 
 namespace Assets.Scripts.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
-
-        public bool isAlive { get; set; }
 
         [SerializeField] private float moveSpeed;
         [SerializeField] private float horizontalSpeed;
@@ -22,11 +21,11 @@ namespace Assets.Scripts.Player
         {
             isGrounded = JumpRaycaster.CheckIfIsGrounded(gameObject.GetComponent<Collider>(), 0.2f);
             velocity += gravityValue * Time.deltaTime;
-            Move(isAlive);
+            Move(Player.isAlive);
         }
         public void Move(bool isAlive)
         {
-            if (isAlive)
+            if (isAlive && !GameManager.IsPlayerReachedFinishlLine)
             {
                 transform.Translate(Vector3.forward * fowardMoveSpeed * Time.deltaTime);
                 TouchSimulator.MoveInAbscissaByTouchSimulation(transform, horizontalSpeed);
