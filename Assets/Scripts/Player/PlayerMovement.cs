@@ -7,6 +7,8 @@ namespace Assets.Scripts.Player
     public class PlayerMovement : MonoBehaviour
     {
 
+        public bool isAlive { get; set; }
+
         [SerializeField] private float moveSpeed;
         [SerializeField] private float horizontalSpeed;
         [SerializeField] private float jumpHeight;
@@ -20,7 +22,7 @@ namespace Assets.Scripts.Player
         {
             isGrounded = JumpRaycaster.CheckIfIsGrounded(gameObject.GetComponent<Collider>(), 0.2f);
             velocity += gravityValue * Time.deltaTime;
-            Move(true);
+            Move(isAlive);
         }
         public void Move(bool isAlive)
         {
