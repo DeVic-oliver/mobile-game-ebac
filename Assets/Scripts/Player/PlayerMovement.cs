@@ -57,11 +57,11 @@ namespace Assets.Scripts.Player
             transform.Translate(Vector3.up * velocity * Time.deltaTime);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            CheckIfGetSpeedPowerUp(other);
+            CheckIfGetSpeedPowerUp(collision);
         }
-        private void CheckIfGetSpeedPowerUp(Collider powerUpCollider)
+        private void CheckIfGetSpeedPowerUp(Collision powerUpCollider)
         {
             PowerupSpeed speedPowerUp = powerUpCollider.gameObject.GetComponent<PowerupSpeed>();
             

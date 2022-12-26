@@ -17,10 +17,13 @@ namespace Assets.Scripts.Items.Powerups
 
         private MeshRenderer _meshRenderer;
 
+        private Collider _collider;
+
 
         private void Start()
         {
             _meshRenderer = GetComponent<MeshRenderer>();
+            _collider = GetComponent<Collider>();
         }
 
         public abstract void DoFloatingBehaviour();
@@ -47,6 +50,7 @@ namespace Assets.Scripts.Items.Powerups
         private IEnumerator DisablePowerUp()
         {
             _meshRenderer.enabled = false;
+            _collider.enabled = false;
             yield return new WaitForSeconds(_timerToDisable);
             gameObject.SetActive(false);
         }

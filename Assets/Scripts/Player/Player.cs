@@ -9,6 +9,7 @@ namespace Assets.Scripts.Player
     {
         public static bool isAlive { get; private set; }
 
+
         private string _obstacleTag = "Obstacle";
         private string _finishLineTag = "FinishLine";
 
@@ -17,18 +18,31 @@ namespace Assets.Scripts.Player
             isAlive = true;
         }
 
-        // Use this for initialization
-        void Start()
+
+        private void OnCollisionEnter(Collision collision)
         {
-        }
+            CheckObstacleCollision(collision);
 
-        // Update is called once per frame
-        void Update()
+            CheckFinishLineCollision(collision);
+
+            CheckCoinCollision(collision);
+
+        }
+        private void CheckObstacleCollision(Collision collision)
         {
-
+            if (collision.gameObject.CompareTag(_obstacleTag))
+            {
+                isAlive = false;
+            }
         }
-
-        private void OnTriggerEnter(Collider collision)
+        private void CheckFinishLineCollision(Collision collision)
+        {
+            if (collision.gameObject.CompareTag(_finishLineTag))
+            {
+                GameManager.IsPlayerReachedFinishlLine = true;
+            }
+        }
+        private void CheckCoinCollision(Collision collision)
         {
             IScorable scorableGameObject = collision.gameObject.GetComponent<IScorable>();
             if (scorableGameObject != null)
@@ -36,19 +50,7 @@ namespace Assets.Scripts.Player
                 scorableGameObject.IncreaseScore();
             }
         }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.CompareTag(_obstacleTag))
-            {
-                isAlive = false;
-            }
-
-            if (collision.gameObject.CompareTag(_finishLineTag))
-            {
-                GameManager.IsPlayerReachedFinishlLine = true;
-            }
-        }
+    
 
     }
 }
