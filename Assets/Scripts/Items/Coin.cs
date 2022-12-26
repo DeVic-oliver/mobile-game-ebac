@@ -15,7 +15,7 @@ public class Coin : MonoBehaviour, IScorable
 
     public void IncreaseScore()
     {
-        Coin.CoinsCollected++;
+        CoinsCollected++;
         StartCoroutine("DisableCoin");
     }
     private IEnumerator DisableCoin()
