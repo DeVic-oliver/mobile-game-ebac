@@ -14,9 +14,16 @@ namespace Assets.Scripts.Player
         [SerializeField] private float jumpHeight;
 
         private float gravityValue = -9.8f;
-        private float fowardMoveSpeed = 3f;
+        private float _fowardMoveSpeed = 3f;
+        private float _originalFowardSpeed;
         private bool isGrounded;
         private float velocity;
+
+
+        private void Start()
+        {
+            _originalFowardSpeed = _fowardMoveSpeed;
+        }
 
         void Update()
         {
@@ -28,7 +35,7 @@ namespace Assets.Scripts.Player
         {
             if (isAlive && !GameManager.IsPlayerReachedFinishlLine)
             {
-                transform.Translate(Vector3.forward * fowardMoveSpeed * Time.deltaTime);
+                transform.Translate(Vector3.forward * _fowardMoveSpeed * Time.deltaTime);
                 TouchSimulator.MoveInAbscissaByTouchSimulation(transform, horizontalSpeed);
                 SetPlayerVerticalVelocityToZero();
                 CheckJump();
@@ -49,6 +56,7 @@ namespace Assets.Scripts.Player
             }
             transform.Translate(Vector3.up * velocity * Time.deltaTime);
         }
+
         private void OnTriggerEnter(Collider other)
         {
             CheckIfGetSpeedPowerUp(other);
