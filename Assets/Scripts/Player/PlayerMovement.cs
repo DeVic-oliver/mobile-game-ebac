@@ -2,6 +2,7 @@
 using UnityEngine;
 using Scripts.Utils;
 using Assets.Scripts.SceneManager;
+using Assets.Scripts.Items.Powerups;
 
 namespace Assets.Scripts.Player
 {
@@ -47,6 +48,25 @@ namespace Assets.Scripts.Player
                 velocity = Mathf.Sqrt(jumpHeight * -3f * gravityValue);
             }
             transform.Translate(Vector3.up * velocity * Time.deltaTime);
+        }
+        private void OnTriggerEnter(Collider other)
+        {
+            CheckIfGetSpeedPowerUp(other);
+        }
+        private void CheckIfGetSpeedPowerUp(Collider powerUpCollider)
+        {
+            PowerupSpeed speedPowerUp = powerUpCollider.gameObject.GetComponent<PowerupSpeed>();
+            
+            if(speedPowerUp != null)
+            {
+                _fowardMoveSpeed = speedPowerUp.GetBuffedValue(_fowardMoveSpeed);
+                StartCoroutine(DeactiveBuff(speedPowerUp.GetBuffTimer()));
+            }
+        }
+        private IEnumerator DeactiveBuff(float timer)
+        {
+            yield return new WaitForSeconds(timer);
+            _fowardMoveSpeed = _originalFowardSpeed;
         }
     }
 }
