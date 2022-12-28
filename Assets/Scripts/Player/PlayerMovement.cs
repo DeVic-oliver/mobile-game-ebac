@@ -2,7 +2,7 @@
 using UnityEngine;
 using Scripts.Utils;
 using Assets.Scripts.SceneManager;
-using Assets.Scripts.Items.Powerups;
+using Assets.Scripts.Items.Powerups.Buffs;
 
 namespace Assets.Scripts.Player
 {

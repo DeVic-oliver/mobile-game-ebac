@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Scripts.Core.Interfaces;
 
-namespace Assets.Scripts.Items.Powerups
+namespace Assets.Scripts.Items.Powerups.Buffs
 {
     public abstract class PowerupBase : MonoBehaviour, IBuffable
     {

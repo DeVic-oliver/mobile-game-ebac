@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Items.Powerups
+namespace Assets.Scripts.Items.Powerups.Buffs
 {
     public class PowerupSpeed : PowerupBase
     {
