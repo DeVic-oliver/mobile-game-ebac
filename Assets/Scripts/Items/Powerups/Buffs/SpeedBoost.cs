@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Items.Powerups.Buffs
 {
-    public class PowerupSpeed : PowerupBase
+    public class SpeedBoost : PowerupBase
     {
         [SerializeField] private float rotationSpeed;
 
@@ -12,7 +12,7 @@ namespace Assets.Scripts.Items.Powerups.Buffs
             DoFloatingBehaviour();
         }
 
-        public override void DoFloatingBehaviour()
+        protected override void DoFloatingBehaviour()
         {
             var eulers = Vector3.up * Time.deltaTime * rotationSpeed;
             transform.Rotate(eulers, Space.World);
