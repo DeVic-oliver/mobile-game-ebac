@@ -57,25 +57,8 @@ namespace Assets.Scripts.Player
             transform.Translate(Vector3.up * _velocity * Time.deltaTime);
         }
 
-        private void OnCollisionEnter(Collision collision)
         public void SetOriginalFowardSpeed()
         {
-            CheckIfGetSpeedPowerUp(collision);
-        }
-        private void CheckIfGetSpeedPowerUp(Collision powerUpCollider)
-        {
-            PowerupSpeed speedPowerUp = powerUpCollider.gameObject.GetComponent<PowerupSpeed>();
-            
-            if(speedPowerUp != null)
-            {
-                _fowardMoveSpeed = speedPowerUp.GetBuffedValue(_fowardMoveSpeed);
-                StartCoroutine(DeactiveBuff(speedPowerUp.GetBuffTimer()));
-            }
-        }
-        private IEnumerator DeactiveBuff(float timer)
-        {
-            yield return new WaitForSeconds(timer);
-            _fowardMoveSpeed = _originalFowardSpeed;
             FowardMoveSpeed = _originalFowardSpeed;
         }
 
