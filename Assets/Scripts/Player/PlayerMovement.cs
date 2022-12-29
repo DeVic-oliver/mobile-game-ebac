@@ -15,9 +15,9 @@ namespace Assets.Scripts.Player
         [SerializeField] private float horizontalSpeed;
         [SerializeField] private float jumpHeight;
 
-        private float gravityValue = -9.8f;
-        private bool isGrounded;
-        private float velocity;
+        private float _gravityValue = -9.8f;
+        private bool _isGrounded;
+        private float _velocity;
 
 
         private void Start()
@@ -27,15 +27,15 @@ namespace Assets.Scripts.Player
 
         void Update()
         {
-            isGrounded = JumpRaycaster.CheckIfIsGrounded(gameObject.GetComponent<Collider>(), 0.2f);
-            velocity += gravityValue * Time.deltaTime;
+            _isGrounded = JumpRaycaster.CheckIfIsGrounded(gameObject.GetComponent<Collider>(), 0.2f);
+            _velocity += _gravityValue * Time.deltaTime;
             Move(Player.isAlive);
         }
         public void Move(bool isAlive)
         {
             if (isAlive && !GameManager.IsPlayerReachedFinishlLine)
             {
-                transform.Translate(Vector3.forward * _fowardMoveSpeed * Time.deltaTime);
+                transform.Translate(Vector3.forward * FowardMoveSpeed * Time.deltaTime);
                 TouchSimulator.MoveInAbscissaByTouchSimulation(transform, horizontalSpeed);
                 SetPlayerVerticalVelocityToZero();
                 CheckJump();
@@ -43,18 +43,18 @@ namespace Assets.Scripts.Player
         }
         private void SetPlayerVerticalVelocityToZero()
         {
-            if (isGrounded && velocity < 0)
+            if (_isGrounded && _velocity < 0)
             {
-                velocity = 0;
+                _velocity = 0;
             }
         }
         private void CheckJump()
         {
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
             {
-                velocity = Mathf.Sqrt(jumpHeight * -3f * gravityValue);
+                _velocity = Mathf.Sqrt(jumpHeight * -3f * _gravityValue);
             }
-            transform.Translate(Vector3.up * velocity * Time.deltaTime);
+            transform.Translate(Vector3.up * _velocity * Time.deltaTime);
         }
 
         private void OnCollisionEnter(Collision collision)
