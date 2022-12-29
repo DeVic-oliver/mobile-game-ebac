@@ -8,21 +8,21 @@ namespace Assets.Scripts.Player
 {
     public class PlayerMovement : MonoBehaviour
     {
+        public float FowardMoveSpeed = 3f;
+        private float _originalFowardSpeed;
 
         [SerializeField] private float moveSpeed;
         [SerializeField] private float horizontalSpeed;
         [SerializeField] private float jumpHeight;
 
         private float gravityValue = -9.8f;
-        private float _fowardMoveSpeed = 3f;
-        private float _originalFowardSpeed;
         private bool isGrounded;
         private float velocity;
 
 
         private void Start()
         {
-            _originalFowardSpeed = _fowardMoveSpeed;
+            _originalFowardSpeed = FowardMoveSpeed;
         }
 
         void Update()
@@ -58,6 +58,7 @@ namespace Assets.Scripts.Player
         }
 
         private void OnCollisionEnter(Collision collision)
+        public void SetOriginalFowardSpeed()
         {
             CheckIfGetSpeedPowerUp(collision);
         }
@@ -75,6 +76,8 @@ namespace Assets.Scripts.Player
         {
             yield return new WaitForSeconds(timer);
             _fowardMoveSpeed = _originalFowardSpeed;
+            FowardMoveSpeed = _originalFowardSpeed;
         }
+
     }
 }
