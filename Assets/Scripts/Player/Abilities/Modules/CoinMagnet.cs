@@ -37,7 +37,6 @@ namespace Assets.Scripts.Player.Abilities.Modules
         {
             float stepPerCall = _magneticForce * Time.deltaTime;
             coinTransform.position = Vector3.MoveTowards(coinTransform.position, _collector.localPosition, stepPerCall);
-
         }
         private void CollectCoin(Vector3 coinPosition, IScorable coin)
         {
