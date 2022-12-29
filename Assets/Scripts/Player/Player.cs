@@ -12,12 +12,17 @@ namespace Assets.Scripts.Player
 
         private string _obstacleTag = "Obstacle";
         private string _finishLineTag = "FinishLine";
+        private Animator _animator;
 
         private void Awake()
         {
             isAlive = true;
         }
 
+        private void Start()
+        {
+            _animator = GetComponent<Animator>();
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -33,6 +38,7 @@ namespace Assets.Scripts.Player
             if (collision.gameObject.CompareTag(_obstacleTag))
             {
                 isAlive = false;
+                _animator.SetBool("IsDead", true);
             }
         }
         private void CheckFinishLineCollision(Collision collision)

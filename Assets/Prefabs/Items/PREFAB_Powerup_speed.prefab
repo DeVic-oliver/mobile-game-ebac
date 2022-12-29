@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6397175776297887420}
   - component: {fileID: 994851233370101556}
   - component: {fileID: 2057206535880247352}
-  - component: {fileID: 8365432930972902288}
   m_Layer: 0
   m_Name: PREFAB_Powerup_speed
   m_TagString: Untagged
@@ -64,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: da24be4ecb4471a438d5d3defefee499, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -112,21 +111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5779240a019d54e9be4d78154cba20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buffMultplierPercentage: 0
-  _buffTimer: 0
-  rotationSpeed: 0
---- !u!114 &8365432930972902288
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7966807228927160612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb5779240a019d54e9be4d78154cba20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _buffMultplierPercentage: 0.506
-  _buffTimer: 8
-  rotationSpeed: 150
+  _buffMultplierPercentage: 0.74
+  _buffTimer: 6
+  rotationSpeed: 200
