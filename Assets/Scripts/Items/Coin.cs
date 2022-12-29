@@ -13,16 +13,16 @@ public class Coin : MonoBehaviour, IScorable
     private MeshRenderer _renderer;
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player")){
+            IncreaseScore();
+        }
+    }
+
     public void IncreaseScore()
     {
         CoinsCollected++;
-        StartCoroutine("DisableCoin");
-    }
-    private IEnumerator DisableCoin()
-    {
-        _collider.enabled = false;
-        _renderer.enabled = false;
-        yield return new WaitForSeconds(_timerToDisable);
         gameObject.SetActive(false);
     }
 

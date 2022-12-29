@@ -29,9 +29,6 @@ namespace Assets.Scripts.Player
             CheckObstacleCollision(collision);
 
             CheckFinishLineCollision(collision);
-
-            CheckCoinCollision(collision);
-
         }
         private void CheckObstacleCollision(Collision collision)
         {
@@ -48,15 +45,5 @@ namespace Assets.Scripts.Player
                 GameManager.IsPlayerReachedFinishlLine = true;
             }
         }
-        private void CheckCoinCollision(Collision collision)
-        {
-            IScorable scorableGameObject = collision.gameObject.GetComponent<IScorable>();
-            if (scorableGameObject != null)
-            {
-                scorableGameObject.IncreaseScore();
-            }
-        }
-    
-
     }
 }
