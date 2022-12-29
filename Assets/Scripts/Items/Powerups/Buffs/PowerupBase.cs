@@ -26,7 +26,7 @@ namespace Assets.Scripts.Items.Powerups.Buffs
             _collider = GetComponent<Collider>();
         }
 
-        public abstract void DoFloatingBehaviour();
+        protected abstract void DoFloatingBehaviour();
 
         public float GetBuffedValue(float valueToBeBuffed)
         {
