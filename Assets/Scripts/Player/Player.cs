@@ -2,6 +2,7 @@
 using UnityEngine;
 using Scripts.Core.Interfaces;
 using Assets.Scripts.SceneManager;
+using Assets.Scripts.Core.Manager;
 
 namespace Assets.Scripts.Player
 {
@@ -12,7 +13,8 @@ namespace Assets.Scripts.Player
 
         private string _obstacleTag = "Obstacle";
         private string _finishLineTag = "FinishLine";
-        private Animator _animator;
+        private AnimationManager _animator;
+
 
         private void Awake()
         {
@@ -21,7 +23,7 @@ namespace Assets.Scripts.Player
 
         private void Start()
         {
-            _animator = GetComponent<Animator>();
+            _animator = GetComponent<AnimationManager>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -35,7 +37,7 @@ namespace Assets.Scripts.Player
             if (collision.gameObject.CompareTag(_obstacleTag))
             {
                 isAlive = false;
-                _animator.SetBool("IsDead", true);
+                _animator.TriggerAnimation("IsDead");
             }
         }
         private void CheckFinishLineCollision(Collision collision)
@@ -43,6 +45,7 @@ namespace Assets.Scripts.Player
             if (collision.gameObject.CompareTag(_finishLineTag))
             {
                 GameManager.IsPlayerReachedFinishlLine = true;
+                _animator.TriggerAnimation("Idle");
             }
         }
     }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Scripts.Utils;
 using Assets.Scripts.SceneManager;
-using Assets.Scripts.Items.Powerups.Buffs;
+using Assets.Scripts.Core.Manager;
 
 namespace Assets.Scripts.Player
 {
@@ -19,10 +19,14 @@ namespace Assets.Scripts.Player
         private bool _isGrounded;
         private float _velocity;
 
+        private AnimationManager _animator;
 
         private void Start()
         {
             _originalFowardSpeed = FowardMoveSpeed;
+            _animator = GetComponent<AnimationManager>();
+            _animator.TriggerAnimation("Run");
+
         }
 
         void Update()
