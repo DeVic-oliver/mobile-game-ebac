@@ -16,13 +16,22 @@ namespace Assets.Scripts.Level
 
         private GameObject _lastPieceInstatiated;
 
+
         private void Start()
         {
-            _lastPieceInstatiated = Instantiate(_startLevelPiece, _levelContainerTransform);
+            SetStartPiece();
 
-            InstatiateAllPieces();
+            SetMiddlePieces();
+
+            SetEndPiece();
         }
-        private void InstatiateAllPieces()
+
+        private void SetStartPiece()
+        {
+            _lastPieceInstatiated = Instantiate(_startLevelPiece, _levelContainerTransform);
+        }
+
+        private void SetMiddlePieces()
         {
             for (int i = 0; i < _piecesToGenerate; i++)
             {
@@ -42,7 +51,15 @@ namespace Assets.Scripts.Level
         }
         private Vector3 GetNewPositionToThePiece()
         {
-            return new Vector3(0, 0, _lastPieceInstatiated.transform.localPosition.z + 10);
+            
+            return _lastPieceInstatiated.GetComponent<LevelPiece>().Endpoint.transform.position;
+        }
+
+        private void SetEndPiece()
+        {
+            _endLevelPiece.transform.position = GetNewPositionToThePiece();
+
+            Instantiate(_endLevelPiece, _levelContainerTransform);
         }
     }
 }
