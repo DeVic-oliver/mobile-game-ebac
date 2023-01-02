@@ -182,6 +182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5847895788713327291}
   - component: {fileID: 8482872462460944869}
+  - component: {fileID: -1158898504834373507}
   m_Layer: 0
   m_Name: Ground_Piece_09
   m_TagString: Untagged
@@ -197,7 +198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6024995698466536139}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 190}
+  m_LocalPosition: {x: 0, y: 0, z: 200}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -221,6 +222,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Endpoint: {fileID: 4200133784922535436}
+--- !u!114 &-1158898504834373507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6024995698466536139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8337104ca0563c943a9f2d8868c4db28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArtPieceSetup: {fileID: 11400000, guid: 2ff0e930df1c9c54e9a9f64ed4430735, type: 2}
 --- !u!1 &7929806789338945157
 GameObject:
   m_ObjectHideFlags: 0
