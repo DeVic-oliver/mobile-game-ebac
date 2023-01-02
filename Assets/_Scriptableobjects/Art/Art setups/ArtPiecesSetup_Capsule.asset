@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArtPieceForPlaceholder: {fileID: 7775928759722875401, guid: b1416037134be444b971dfe39f129dd0,
     type: 3}
-  ArtiPieceColor: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
+  ArtPieceColor:
+  - {r: 1, g: 0.58428466, b: 0.2980392, a: 1}
+  - {r: 0.1462264, g: 0.5252972, b: 1, a: 1}
+  - {r: 0.28664735, g: 0.745283, b: 0, a: 1}
+  - {r: 0.45498422, g: 0, b: 0.74509805, a: 1}
+  - {r: 0.21582414, g: 0.4716981, b: 0.35620567, a: 1}
