@@ -8,9 +8,6 @@ public class Coin : MonoBehaviour, IScorable
 
     [SerializeField] private float _rotationSpeed;
     private bool _isCollected;
-    private float _timerToDisable = 0.3f;
-    private Collider _collider;
-    private MeshRenderer _renderer;
 
 
     private void OnTriggerEnter(Collider other)
@@ -19,21 +16,10 @@ public class Coin : MonoBehaviour, IScorable
             IncreaseScore();
         }
     }
-
     public void IncreaseScore()
     {
         CoinsCollected++;
         gameObject.SetActive(false);
-    }
-
-    private void Start()
-    {
-        InitComponents();
-    }
-    private void InitComponents()
-    {
-        _collider = GetComponent<Collider>();
-        _renderer = GetComponent<MeshRenderer>();
     }
 
     private void Update()
