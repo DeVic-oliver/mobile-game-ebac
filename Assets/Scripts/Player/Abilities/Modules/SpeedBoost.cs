@@ -20,7 +20,6 @@ namespace Assets.Scripts.Player.Abilities.Modules
             SpeedBoostBuff speedBoostItem = other.GetComponent<SpeedBoostBuff>();
             if (speedBoostItem != null)
             {
-                Debug.Log("PEGOU O BOOST");
                 _playerMovement.FowardMoveSpeed = speedBoostItem.GetBuffedValue(_playerMovement.FowardMoveSpeed);
                 StartCoroutine(DeactiveBuff(speedBoostItem.GetBuffTimer()));
             }

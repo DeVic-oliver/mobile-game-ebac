@@ -48,5 +48,6 @@ namespace Assets.Scripts.Player
                 _animator.TriggerAnimation("Idle");
             }
         }
+
     }
 }
