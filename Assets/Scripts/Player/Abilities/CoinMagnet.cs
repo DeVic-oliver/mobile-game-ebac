@@ -16,7 +16,7 @@ namespace Assets.Scripts.Player.Abilities
             if (powerUp != null)
             {
                 DotweenHelper.ScaleYoYo(gameObject);
-                powerUp.gameObject.SetActive(false);
+                powerUp.EnableAbility();
                 coinMagnetGameObject.ActiveAbilityBuff();
             }
         }
