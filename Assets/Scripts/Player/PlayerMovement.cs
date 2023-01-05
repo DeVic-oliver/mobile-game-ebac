@@ -18,13 +18,22 @@ namespace Assets.Scripts.Player
         private float _gravityValue = -9.8f;
         private bool _isGrounded;
         private float _velocity;
+        private bool _canMove;
 
         private AnimationManager _animator;
 
         private void Start()
         {
-            _originalFowardSpeed = FowardMoveSpeed;
+            _canMove = false;
             _animator = GetComponent<AnimationManager>();
+            _animator.TriggerAnimation("Idle");
+            StartCoroutine(CountToMove());
+        }
+        private IEnumerator CountToMove()
+        {
+            yield return new WaitForSeconds(1.5f);
+            _canMove = true;
+            _originalFowardSpeed = FowardMoveSpeed;
             _animator.TriggerAnimation("Run");
 
         }
@@ -37,7 +46,7 @@ namespace Assets.Scripts.Player
         }
         public void Move(bool isAlive)
         {
-            if (isAlive && !GameManager.IsPlayerReachedFinishlLine)
+            if (isAlive && !GameManager.IsPlayerReachedFinishlLine && _canMove)
             {
                 transform.Translate(Vector3.forward * FowardMoveSpeed * Time.deltaTime);
                 TouchSimulator.MoveInAbscissaByTouchSimulation(transform, horizontalSpeed);
