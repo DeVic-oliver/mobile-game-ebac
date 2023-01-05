@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace Assets.Scripts.Level
 {
@@ -16,6 +17,7 @@ namespace Assets.Scripts.Level
 
         private GameObject _lastPieceInstatiated;
 
+        private List<GameObject> _levelSpawnedPieces = new List<GameObject>();
 
         private void Start()
         {
@@ -24,6 +26,9 @@ namespace Assets.Scripts.Level
             SetMiddlePieces();
 
             SetEndPiece();
+
+            StartCoroutine(TweenChildsScalePiecesToOne());
+           
         }
 
         private void SetStartPiece()
@@ -40,9 +45,12 @@ namespace Assets.Scripts.Level
 
                 pieceChoosed.transform.localPosition = GetNewPositionToThePiece();
 
-                Instantiate(pieceChoosed, _levelContainerTransform);
+                pieceChoosed = Instantiate(pieceChoosed, _levelContainerTransform);
 
                 _lastPieceInstatiated = pieceChoosed;
+
+                _levelSpawnedPieces.Add(_lastPieceInstatiated);
+
             }
         }
         private GameObject GetRandomPieceOfList()
@@ -59,7 +67,47 @@ namespace Assets.Scripts.Level
         {
             _endLevelPiece.transform.position = GetNewPositionToThePiece();
 
-            Instantiate(_endLevelPiece, _levelContainerTransform);
+            var lastPiece = Instantiate(_endLevelPiece, _levelContainerTransform);
+
+            _levelSpawnedPieces.Add(lastPiece);
+
+        }
+
+
+        IEnumerator TweenChildsScalePiecesToOne()
+        {
+            SetChildsScaleToZero();
+
+            foreach (GameObject piece in _levelSpawnedPieces)
+            {
+                GameObject ground = GetChild(piece, "Ground");
+
+                ground.transform.DOScale(1f, 0.6f).SetEase(Ease.OutBack);
+
+                yield return new WaitForSeconds(0.1f);
+            }
+
+        }
+        private void SetChildsScaleToZero()
+        {
+            foreach (GameObject piece in _levelSpawnedPieces)
+            {
+                GameObject ground = GetChild(piece, "Ground");
+
+                ground.transform.localScale = Vector3.zero;
+
+            }
+        }
+        private GameObject GetChild(GameObject parent, string childName)
+        {
+            var child = parent.transform.Find(childName);
+
+            if(child != null)
+            {
+                return child.gameObject;
+            }
+
+            return null;
         }
     }
 }
