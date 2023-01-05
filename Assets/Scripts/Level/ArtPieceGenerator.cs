@@ -30,7 +30,8 @@ public class ArtPieceGenerator : MonoBehaviour
     }
     private void CreateArtPiecesContainer()
     {
-        _artPiecesContainer = Instantiate(new GameObject("ArtPiecesContainer"), transform);
+        _artPiecesContainer = new GameObject("ArtPiecesContainer");
+        _artPiecesContainer.transform.SetParent(transform);
         _artPiecesContainer.transform.localPosition = Vector3.zero;
     }
     private void PopulateArtPiecesContainer()
